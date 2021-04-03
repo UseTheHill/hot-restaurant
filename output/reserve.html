@@ -56,7 +56,7 @@
     </div>
 
     <script type="text/javascript">
-    $("#reserve-btn").on("click", (event) => {
+    $("#reserve-btn").on("click", function (event) {
         event.preventDefault();
         let newReservation = {
             name: $("#name").val().trim(),
