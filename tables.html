@@ -55,7 +55,6 @@
           </div>
           <footer class="footer">
             <div class="footer">
-              <p>Control Panel</p>
               <p><a href="#" id="clear">Clear Table</a> | <a href="/api/tables">API Table Link</a> | <a href="/api/waitlist">API Wait List</a></p>
             </div>
           </footer>
@@ -85,7 +84,7 @@
                 let tableList = $("<div class='table-info' id='tableInfo-" + tableNumber + "'></div>");
                 $("#table-list").append(tableList);
 
-                $("#tableInfo-" + tableNumber).append("<h2>" + tableNumber + "</h2>\n"),
+                $("#tableInfo-" + tableNumber).append("<h2>Table Number:" + tableNumber + "</h2>\n"),
                 $("#tableInfo-" + tableNumber).append("<hr>"),
                 $("#tableInfo-" + tableNumber).append("<h2>ID: " +  data[i].id + "</h2>\n"),
                 $("#tableInfo-" + tableNumber).append("<h2>Name:" + data[i].name + "</h2>\n"),
@@ -97,7 +96,7 @@
             console.error(error);
           });
 
-          fetch(`/api/waitlist`, {
+          fetch('/api/waitlist', {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
