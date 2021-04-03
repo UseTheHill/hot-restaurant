@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tables Page</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"/>
+    <link rel ="stylesheet" href="style.css">
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="jumbotron">
+        <h1> <span class="fa fa-fire"></span> Hot Resturants</h1>
+        <hr>
+        <h2>Current Reservations and Waiting List</h2>
+        <br>
+        <div class="buttons">
+        <a href="/reserve">
+          <button class="btn btn-danger btn-lg" id="make-reservation-btn">
+            <span class="fa fa-credit-card"></span> Make Reservation
+          </button>
+        </a>
+        <a href="/">
+            <button class="btn btn-danger btn-lg" id="home-btn">
+              <span class="fa fa-home"></span>
+            </button>
+          </a>
+          </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="card">
+            <div class="card-header">
+              <h3>Current Reservations</h3>
+            </div>
+            <!-- Where you generate the table in the javascript-->
+            <div class="card-body">
+                <div id="table-list" class= "list-group">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <h3>Waiting List</h3>
+            </div>
+            <div class="card-body">
+                <ul id="wait-list" class="list-group">
+                </ul>
+              </div>
+            </div>
+          </div>
+          <footer class="footer">
+            <div class="footer">
+              <p>Control Panel</p>
+              <p><a href="#" id="clear">Clear Table</a> | <a href="/api/tables">API Table Link</a> | <a href="/api/waitlist">API Wait List</a></p>
+            </div>
+          </footer>
+        </div>
+
+    <script
+        src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+        crossorigin="anonymous"></script>
+    <script type="text/javascript">
+      let $makeResrvationBtn = $("#make-reservation-btn");
+      let $homeBtn = $("#home-btn");
+      let $tableList = $("#table-list");
+
+      
+        //fetch(`api/waitlist`)
+        fetch(`/api/reserve`, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            console.log(data);
+            for (let i=0; i < data.length; i++) {
+                let tableNumber = i + 1;
+                let tableList = $("<div class='table-info' id='tableInfo-" + tableNumber + "'></div>");
+                $("#table-list").append(tableList);
+
+                $("#tableInfo-" + tableNumber).append("<h2>" + tableNumber + "</h2>\n"),
+                $("#tableInfo-" + tableNumber).append("<hr>"),
+                $("#tableInfo-" + tableNumber).append("<h2>ID: " +  data[i].id + "</h2>\n"),
+                $("#tableInfo-" + tableNumber).append("<h2>Name:" + data[i].name + "</h2>\n"),
+                $("#tableInfo-" + tableNumber).append("<h2>Email:" + data[i].email + "</h2>\n"),
+                $("#tableInfo-" + tableNumber).append("<h2>Phone:" + data[i].phone + "</h2>")
+            }
+          })
+          .catch((error) => {
+            console.error(error);
+          });
+    </script>
+  </body>
+</html>
