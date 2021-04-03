@@ -15,7 +15,7 @@
             <h3>Make your reservation</h3>
             <hr>
             <a href="/tables"><button class="btn btn-danger btn-lg"><span ></span> View Tables</button></a>
-        <a href="/home"><button class="btn btn-primary btn-lg"><span ></span> Home</button></a>
+        <a href="/"><button class="btn btn-primary btn-lg"><span ></span> Home</button></a>
         </div>
         <div class="row">
             <div class="col-12">
@@ -67,7 +67,7 @@
         };
         console.log("!", newReservation)
 
-        $.post("/api/tables", newReservation,
+        $.post("/api/reserve", newReservation,
         function (data) {
             if(data){
                 alert("Thank you for reserving!");
