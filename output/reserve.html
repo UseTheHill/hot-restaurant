@@ -66,10 +66,17 @@
         };
         console.log("!", newReservation)
 
-        $.post("/api/reservations", newReservation)
-        .then(function(data) {
-            console.log("reserve.html", data);
-            alert("Adding reservation...");
+        $.post("/api/tables", newReservation,
+        function (data) {
+            if(data){
+                alert("Thank you for reserving!");
+            } else {
+                alert("sorry, we currently have a wait list");
+            }
+            $("#name").val("");
+            $("phone-number").val("");
+            $("email").val("");
+            $("#unique-id").val("");
         });
     });
     </script>
