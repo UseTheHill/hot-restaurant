@@ -67,7 +67,7 @@
         };
         console.log("!", newReservation)
 
-        $.post("/api/tables", newReservation,
+        $.post("/api/reserve", newReservation,
         function (data) {
             if(data){
                 alert("Thank you for reserving!");
