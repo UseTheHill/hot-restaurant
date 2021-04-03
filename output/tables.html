@@ -97,6 +97,29 @@
           .catch((error) => {
             console.error(error);
           });
+
+          fetch(`/api/waitlist`, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            console.log(data);
+            for (let i=0; i < data.length; i++) {
+                let waitList = $("<div class='wait-list-info' id='wait-listInfo-'></div>");
+                $("#wait-list-info").append(waitList);
+                
+                waitList.append("<h2>ID: " +  data[i].id + "</h2>\n"),
+                waitList.append("<h2>Name:" + data[i].name + "</h2>\n"),
+                waitList.append("<h2>Email:" + data[i].email + "</h2>\n"),
+                waitList.append("<h2>Phone:" + data[i].phone + "</h2>")
+            }
+          })
+          .catch((error) => {
+            console.error(error);
+          });
     </script>
   </body>
 </html>
